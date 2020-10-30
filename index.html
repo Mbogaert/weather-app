@@ -1,25 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/6cf85d23b4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Application</title>
 </head>
+
 <body>
     <!-- bootstrap navbar -->
     <nav class="navbar navbar-dark bg-dark justify-content-center">
         <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
-      </nav>
+    </nav>
+
+
     <!-- field group -->
-    <!-- button addons -->
-    <!-- listgroup -->
-    <!-- card -->
-    <!-- UV index - badge -->
+    <div class="container">
+        <div class="row">
+            <div class="col-3" style="background-color: lightgray;">
+                <p>Search for a City:</p>
+                <!-- input / button addon -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="City name" aria-label="Recipient's username"
+                        aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search" style="color: white;"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- listgroup -->
+            </div>
+            <!-- card -->
+            <div class="col-9">
+                THIS IS WHERE THE CARDS WILL GO
+            </div>
+            <!-- UV index - badge -->
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>

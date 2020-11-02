@@ -1,7 +1,3 @@
-// GIVEN a weather dashboard with form inputs
-
-// attach the weather api
-
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
 
@@ -18,23 +14,61 @@
 // THEN I am again presented with current and future conditions for that city
 
 var apiKey = "63e409062f46109940a91678faa9c0ee";
+var cityFormEl = document.querySelector("#city-form");
+var cityInputEl = document.querySelector("#city-input");
+var todayCityEl = document.querySelector("#city-output");
+var todayTemp = document.querySelector("#temp");
+var todayHumidity = document.querySelector("#humidity");
+var todayWind = document.querySelector("#wind");
+var todayUV = document.querySelector("#uv");
+var todayIcon = document.querySelector("#icon");
 
-var getCityWeather = function(city) {
-    var apiCityUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
 
-    fetch(apiCityUrl).then(function(response) {
-        response.json().then(function(data) {
-        console.log(data);
-    });
+var getCityWeather = function (city) {
+    var apiCityUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
+
+    // fetch the weather api
+    fetch(apiCityUrl).then(function (response) {
+        response.json().then(function (data) {
+            displayTodayTemp(data, city);
+        });
     });
 };
 
-getCityWeather("Seattle");
+// submit the button for the input of the city
+var formSubmitHandler = function (event) {
+    event.preventDefault();
 
-// var cityInputEl = document.querySelector("#city-input");
+    // get value from input element
+    var city = cityInputEl.value.trim();
 
-// var getCityHandler = function(event) {
-//     event.preventDefault();
+    if (city) {
+        getCityWeather(city);
+        cityInputEl.value = "";
+    } else {
+        alert("Please enter a city");
+    }
+};
 
-//     var cityName = 
-// }
+var displayTodayTemp = function (todayWeather) {
+    console.log(todayWeather);
+
+    // clear old content
+    todayCityEl.textContent = "";
+    todayTemp.textContent = "";
+    todayHumidity.textContent = "";
+    todayWind.textContent = "";
+    todayUV.textContent = "";
+    todayIcon.setAttribute = "";
+
+    var today = moment().format("M/DD/YYYY");
+
+    todayCityEl.innerHTML = "<h5>" + todayWeather.name + " (" + today + ")" + "</h5>";
+    todayIcon.src = "http://openweathermap.org/img/w/" + todayWeather.weather[0].icon + ".png";
+    todayTemp.textContent = "Temperature: " + Math.floor(todayWeather.main.temp) + "° F";
+    todayHumidity.textContent = "Humidity: " + todayWeather.main.humidity + "%";
+    todayWind.textContent = "Wind Speed: " + todayWeather.wind.speed + " MPH";
+    todayUV.textContent = "";
+};
+
+cityFormEl.addEventListener("submit", formSubmitHandler);

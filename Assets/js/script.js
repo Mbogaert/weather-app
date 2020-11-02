@@ -17,18 +17,19 @@
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
 
-var city = "Tucson";
 var apiKey = "63e409062f46109940a91678faa9c0ee";
 
-var getCityWeather = function() {
-    fetch("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey).then(function(response) {
+var getCityWeather = function(city) {
+    var apiCityUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+
+    fetch(apiCityUrl).then(function(response) {
         response.json().then(function(data) {
         console.log(data);
     });
     });
 };
 
-getCityWeather();
+getCityWeather("Seattle");
 
 // var cityInputEl = document.querySelector("#city-input");
 

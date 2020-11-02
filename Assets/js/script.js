@@ -1,5 +1,7 @@
 // GIVEN a weather dashboard with form inputs
 
+// attach the weather api
+
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
 
@@ -14,3 +16,24 @@
 
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
+
+var city = "Tucson";
+var apiKey = "63e409062f46109940a91678faa9c0ee";
+
+var getCityWeather = function() {
+    fetch("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey).then(function(response) {
+        response.json().then(function(data) {
+        console.log(data);
+    });
+    });
+};
+
+getCityWeather();
+
+// var cityInputEl = document.querySelector("#city-input");
+
+// var getCityHandler = function(event) {
+//     event.preventDefault();
+
+//     var cityName = 
+// }

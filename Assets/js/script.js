@@ -4,9 +4,6 @@
 // WHEN I view current weather conditions for that city
 // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
 
-// WHEN I view the UV index
-// THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe 
-
 // WHEN I view future weather conditions for that city
 // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
 
@@ -34,6 +31,16 @@ var getCityWeather = function (city) {
         });
     });
 };
+
+var getFiveDayWeather = function (city) {
+    var api5DayUrl = "api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + apiKey;
+
+    fetch(api5DayUrl).then(function (response5day) {
+        response5day.json().then(function (data5day) {
+            console.log(data5day, city);
+        });
+    });
+}
 
 // submit the button for the input of the city
 var formSubmitHandler = function (event) {

@@ -35,6 +35,8 @@ var humid2El = document.querySelector("#humidity2");
 var humid3El = document.querySelector("#humidity3");
 var humid4El = document.querySelector("#humidity4");
 var humid5El = document.querySelector("#humidity5");
+var cityList = [];
+var populateList = document.querySelector(".list-group")
 
 var getCityWeather = function (city) {
     var apiCityUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
@@ -57,6 +59,26 @@ var getFiveDayWeather = function (city) {
     })
 }
 
+var displayCityList = function () {
+    $(".list-group").empty();
+    cityListString = localStorage.getItem("cityList");
+
+    cityList = JSON.parse(cityListString);
+    if (cityList === null) {
+        cityList = [];
+    }
+
+    for (var i = cityList.length - 1; i >= 0; i--) {
+        var listEl = document.createElement("li");
+        listEl.setAttribute("class", "list-group-item");
+        listEl.setAttribute("Onclick", "formSubmitHandler(this)");
+        listEl.setAttribute("value", cityList[i]);
+        listEl.innerText = cityList[i];
+        citySearch.appendChild(listEl);
+
+    }
+}
+
 // submit the button for the input of the city
 var formSubmitHandler = function (event) {
     event.preventDefault();
@@ -64,9 +86,15 @@ var formSubmitHandler = function (event) {
     // get value from input element
     var city = cityInputEl.value.trim();
 
+    cityList.push(city);
+    localStorage.setItem("cityList", JSON.stringify(cityList));
+
+    console.log(localStorage);
+
     if (city) {
         getCityWeather(city);
         getFiveDayWeather(city);
+        displayCityList(city);
         cityInputEl.value = "";
     } else {
         alert("Please enter a city");

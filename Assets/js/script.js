@@ -191,6 +191,6 @@ var display5DayTemp = function (Weather5Days) {
     humid3El.textContent = "Humidity: " + Weather5Days.list[20].main.humidity + "%";
     humid4El.textContent = "Humidity: " + Weather5Days.list[28].main.humidity + "%";
     humid5El.textContent = "Humidity: " + Weather5Days.list[36].main.humidity + "%";
-}
+};
 
 cityFormEl.addEventListener("submit", formSubmitHandler);

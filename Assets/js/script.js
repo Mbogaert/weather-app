@@ -22,6 +22,11 @@ var todayHumidity = document.querySelector("#humidity");
 var todayWind = document.querySelector("#wind");
 var todayUV = document.querySelector("#uv");
 var todayIcon = document.querySelector("#icon");
+var day1DateEl = document.querySelector("#date1");
+var day2DateEl = document.querySelector("#date2");
+var day3DateEl = document.querySelector("#date3");
+var day4DateEl = document.querySelector("#date4");
+var day5DateEl = document.querySelector("#date5");
 
 
 var getCityWeather = function (city) {
@@ -35,6 +40,16 @@ var getCityWeather = function (city) {
     });
 };
 
+var getFiveDayWeather = function (city) {
+    var api5DayUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + apiKey;
+
+    fetch(api5DayUrl).then(function (response5day) {
+        response5day.json().then(function (data5day) {
+            display5DayTemp(data5day, city);
+        })
+    })
+}
+
 // submit the button for the input of the city
 var formSubmitHandler = function (event) {
     event.preventDefault();
@@ -44,6 +59,7 @@ var formSubmitHandler = function (event) {
 
     if (city) {
         getCityWeather(city);
+        getFiveDayWeather(city);
         cityInputEl.value = "";
     } else {
         alert("Please enter a city");
@@ -51,7 +67,6 @@ var formSubmitHandler = function (event) {
 };
 
 var displayTodayTemp = function (todayWeather) {
-    console.log(todayWeather);
 
     // clear old content
     todayCityEl.textContent = "";
@@ -74,8 +89,6 @@ var displayTodayTemp = function (todayWeather) {
 
     var lat = todayWeather.coord.lat;
     var lon = todayWeather.coord.lon;
-    console.log("lat", lat);
-    console.log("lon", lon);
 
     // uv index get - need to make the color smaller still 
     var apiUVUrl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
@@ -105,5 +118,56 @@ var displayTodayTemp = function (todayWeather) {
     });
 
 };
+
+var display5DayTemp = function (Weather5Days) {
+    // clear old content
+    day1DateEl.textContent = "";
+    day2DateEl.textContent = "";
+    day3DateEl.textContent = "";
+    day4DateEl.textContent = "";
+    day5DateEl.textContent = "";
+
+    var day1Data = Weather5Days.list[4].dt_txt;
+    var formatDate1 = moment(day1Data).format("M/DD/YYYY");
+
+    day1DateEl.textContent = formatDate1;
+
+    var day2Data = Weather5Days.list[12].dt_txt;
+    var formatDate2 = moment(day2Data).format("M/DD/YYYY");
+
+    day2DateEl.textContent = formatDate2;
+
+    var day3Data = Weather5Days.list[20].dt_txt;
+    var formatDate3 = moment(day3Data).format("M/DD/YYYY");
+
+    day3DateEl.textContent = formatDate3;
+
+    var day4Data = Weather5Days.list[28].dt_txt;
+    var formatDate4 = moment(day4Data).format("M/DD/YYYY");
+
+    day4DateEl.textContent = formatDate4;
+
+    var day5Data = Weather5Days.list[36].dt_txt;
+    var formatDate5 = moment(day5Data).format("M/DD/YYYY");
+
+    day5DateEl.textContent = formatDate5;
+    
+
+    // clear old content
+    // todayCityEl.textContent = "";
+    // todayTemp.textContent = "";
+    // todayHumidity.textContent = "";
+    // todayWind.textContent = "";
+    // todayUV.textContent = "";
+    // todayIcon.setAttribute = "";
+
+
+    // calls the current day fuction
+    // todayCityEl.innerHTML = "<h5>" + todayWeather.name + " (" + today + ")" + "</h5>";
+    // todayIcon.src = "http://openweathermap.org/img/w/" + todayWeather.weather[0].icon + ".png";
+    // todayTemp.textContent = "Temperature: " + Math.floor(todayWeather.main.temp) + "° F";
+    // todayHumidity.textContent = "Humidity: " + todayWeather.main.humidity + "%";
+    // todayWind.textContent = "Wind Speed: " + todayWeather.wind.speed + " MPH";
+}
 
 cityFormEl.addEventListener("submit", formSubmitHandler);

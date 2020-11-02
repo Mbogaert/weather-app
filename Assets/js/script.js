@@ -1,17 +1,10 @@
 // WHEN I search for a city
-// THEN I am presented with current and future conditions for that city and that city is added to the search history
-
-// WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-
-// WHEN I view the UV index
-// THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe 
-
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
+// THEN and that city is added to the search history
 
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
+
+// Need to color the 5-day forcast, make it disappear when not in use...
 
 var apiKey = "63e409062f46109940a91678faa9c0ee";
 var cityFormEl = document.querySelector("#city-form");
@@ -27,7 +20,21 @@ var day2DateEl = document.querySelector("#date2");
 var day3DateEl = document.querySelector("#date3");
 var day4DateEl = document.querySelector("#date4");
 var day5DateEl = document.querySelector("#date5");
-
+var icon1El = document.querySelector("#icon1");
+var icon2El = document.querySelector("#icon2");
+var icon3El = document.querySelector("#icon3");
+var icon4El = document.querySelector("#icon4");
+var icon5El = document.querySelector("#icon5");
+var temp1El = document.querySelector("#temp1");
+var temp2El = document.querySelector("#temp2");
+var temp3El = document.querySelector("#temp3");
+var temp4El = document.querySelector("#temp4");
+var temp5El = document.querySelector("#temp5");
+var humid1El = document.querySelector("#humidity1");
+var humid2El = document.querySelector("#humidity2");
+var humid3El = document.querySelector("#humidity3");
+var humid4El = document.querySelector("#humidity4");
+var humid5El = document.querySelector("#humidity5");
 
 var getCityWeather = function (city) {
     var apiCityUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
@@ -74,7 +81,7 @@ var displayTodayTemp = function (todayWeather) {
     todayHumidity.textContent = "";
     todayWind.textContent = "";
     todayUV.textContent = "";
-    todayIcon.setAttribute = "";
+    todayIcon.src = "";
 
     // todays date is called
     var today = moment().format("M/DD/YYYY");
@@ -126,6 +133,21 @@ var display5DayTemp = function (Weather5Days) {
     day3DateEl.textContent = "";
     day4DateEl.textContent = "";
     day5DateEl.textContent = "";
+    icon1El.src = "";
+    icon2El.src = "";
+    icon3El.src = "";
+    icon4El.src = "";
+    icon5El.src = "";
+    temp1El.textContent = "";
+    temp2El.textContent = "";
+    temp3El.textContent = "";
+    temp4El.textContent = "";
+    temp5El.textContent = "";
+    humid1El.textContent = "";
+    humid2El.textContent = "";
+    humid3El.textContent = "";
+    humid4El.textContent = "";
+    humid5El.textContent = "";
 
     var day1Data = Weather5Days.list[4].dt_txt;
     var formatDate1 = moment(day1Data).format("M/DD/YYYY");
@@ -151,23 +173,24 @@ var display5DayTemp = function (Weather5Days) {
     var formatDate5 = moment(day5Data).format("M/DD/YYYY");
 
     day5DateEl.textContent = formatDate5;
+
+    icon1El.src = "http://openweathermap.org/img/w/" + Weather5Days.list[4].weather[0].icon + ".png";
+    icon2El.src = "http://openweathermap.org/img/w/" + Weather5Days.list[12].weather[0].icon + ".png";
+    icon3El.src = "http://openweathermap.org/img/w/" + Weather5Days.list[20].weather[0].icon + ".png";
+    icon4El.src = "http://openweathermap.org/img/w/" + Weather5Days.list[28].weather[0].icon + ".png";
+    icon5El.src = "http://openweathermap.org/img/w/" + Weather5Days.list[36].weather[0].icon + ".png";
     
+    temp1El.textContent = "Temp: " + Math.floor(Weather5Days.list[4].main.temp) + "° F";
+    temp2El.textContent = "Temp: " + Math.floor(Weather5Days.list[12].main.temp) + "° F";
+    temp3El.textContent = "Temp: " + Math.floor(Weather5Days.list[20].main.temp) + "° F";
+    temp4El.textContent = "Temp: " + Math.floor(Weather5Days.list[28].main.temp) + "° F";
+    temp5El.textContent = "Temp: " + Math.floor(Weather5Days.list[36].main.temp) + "° F";
 
-    // clear old content
-    // todayCityEl.textContent = "";
-    // todayTemp.textContent = "";
-    // todayHumidity.textContent = "";
-    // todayWind.textContent = "";
-    // todayUV.textContent = "";
-    // todayIcon.setAttribute = "";
-
-
-    // calls the current day fuction
-    // todayCityEl.innerHTML = "<h5>" + todayWeather.name + " (" + today + ")" + "</h5>";
-    // todayIcon.src = "http://openweathermap.org/img/w/" + todayWeather.weather[0].icon + ".png";
-    // todayTemp.textContent = "Temperature: " + Math.floor(todayWeather.main.temp) + "° F";
-    // todayHumidity.textContent = "Humidity: " + todayWeather.main.humidity + "%";
-    // todayWind.textContent = "Wind Speed: " + todayWeather.wind.speed + " MPH";
+    humid1El.textContent = "Humidity: " + Weather5Days.list[4].main.humidity + "%";
+    humid2El.textContent = "Humidity: " + Weather5Days.list[12].main.humidity + "%";
+    humid3El.textContent = "Humidity: " + Weather5Days.list[20].main.humidity + "%";
+    humid4El.textContent = "Humidity: " + Weather5Days.list[28].main.humidity + "%";
+    humid5El.textContent = "Humidity: " + Weather5Days.list[36].main.humidity + "%";
 }
 
 cityFormEl.addEventListener("submit", formSubmitHandler);

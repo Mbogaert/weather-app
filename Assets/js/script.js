@@ -61,14 +61,31 @@ var displayTodayTemp = function (todayWeather) {
     todayUV.textContent = "";
     todayIcon.setAttribute = "";
 
+    // todays date is called
     var today = moment().format("M/DD/YYYY");
 
+
+    // calls the current day fuction
     todayCityEl.innerHTML = "<h5>" + todayWeather.name + " (" + today + ")" + "</h5>";
     todayIcon.src = "http://openweathermap.org/img/w/" + todayWeather.weather[0].icon + ".png";
     todayTemp.textContent = "Temperature: " + Math.floor(todayWeather.main.temp) + "° F";
     todayHumidity.textContent = "Humidity: " + todayWeather.main.humidity + "%";
     todayWind.textContent = "Wind Speed: " + todayWeather.wind.speed + " MPH";
-    todayUV.textContent = "";
+
+    var lat = todayWeather.coord.lat;
+    var lon = todayWeather.coord.lon;
+    console.log("lat", lat);
+    console.log("lon", lon);
+
+    var apiUVUrl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
+
+    fetch(apiUVUrl).then(function (response) {
+        response.json().then(function (data) {
+            todayUV.textContent = "UV Index: " + data.value;
+            var uv = data.value;
+        });
+    });
+
 };
 
 cityFormEl.addEventListener("submit", formSubmitHandler);

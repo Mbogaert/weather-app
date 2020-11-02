@@ -77,12 +77,30 @@ var displayTodayTemp = function (todayWeather) {
     console.log("lat", lat);
     console.log("lon", lon);
 
+    // uv index get - need to make the color smaller still 
     var apiUVUrl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
 
     fetch(apiUVUrl).then(function (response) {
         response.json().then(function (data) {
             todayUV.textContent = "UV Index: " + data.value;
-            var uv = data.value;
+            var uvValue = data.value;
+
+            if (uvValue <= 3) {
+                todayUV.classList.remove("moderate", "high", "very-high", "extreme");
+                todayUV.classList.add("low");
+            } else if (uvValue > 3 && uvValue <= 6) {
+                todayUV.classList.remove("low", "high", "very-high", "extreme");
+                todayUV.classList.add("moderate");
+            } else if (uvValue > 8 && uvValue <= 8) {
+                todayUV.classList.remove("low", "moderate", "very-high", "extreme");;
+                todayUV.classList.add("high");
+            } else if (uvValue > 11 && uvValue <= 11) {
+                todayUV.classList.remove("low", "high", "moderate", "extreme");;
+                todayUV.classList.add("very-high");
+            } else {
+                todayUV.classList.remove("low", "high", "very-high", "moderate");;
+                todayUV.classList.add("extreme");
+            }
         });
     });
 

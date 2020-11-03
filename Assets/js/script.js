@@ -71,12 +71,18 @@ var displayCityList = function () {
     for (var i = cityList.length - 1; i >= 0; i--) {
         var listEl = document.createElement("li");
         listEl.setAttribute("class", "list-group-item");
-        listEl.setAttribute("Onclick", "formSubmitHandler(this)");
+        listEl.setAttribute("Onclick", "runCityList(this)");
         listEl.setAttribute("value", cityList[i]);
         listEl.innerText = cityList[i];
         citySearch.appendChild(listEl);
 
     }
+}
+
+var runCityList = function (value) {
+    var cityClick = value.textContent;
+    getCityWeather(cityClick);
+    getFiveDayWeather(cityClick);
 }
 
 // submit the button for the input of the city

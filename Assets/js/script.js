@@ -1,9 +1,3 @@
-// WHEN I search for a city
-// THEN and that city is added to the search history
-
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
-
 // Need to color the 5-day forcast, make it disappear when not in use...
 
 var apiKey = "63e409062f46109940a91678faa9c0ee";
@@ -131,12 +125,15 @@ var displayTodayTemp = function (todayWeather) {
     var lat = todayWeather.coord.lat;
     var lon = todayWeather.coord.lon;
 
+    var UVIndex = document.querySelector("#index");
+    UVIndex.textContent = "UV Index:";
+
     // uv index get - need to make the color smaller still 
     var apiUVUrl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
 
     fetch(apiUVUrl).then(function (response) {
         response.json().then(function (data) {
-            todayUV.textContent = "UV Index: " + data.value;
+            todayUV.textContent = " " + data.value;
             var uvValue = data.value;
 
             if (uvValue <= 3) {

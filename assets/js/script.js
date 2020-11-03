@@ -1,5 +1,3 @@
-// Need to color the 5-day forcast, make it disappear when not in use...
-
 var apiKey = "63e409062f46109940a91678faa9c0ee";
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.querySelector("#city-input");

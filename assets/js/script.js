@@ -31,7 +31,7 @@ var cityList = [];
 var populateList = document.querySelector(".list-group")
 
 var getCityWeather = function (city) {
-    var apiCityUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
+    var apiCityUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
 
     // fetch the weather api
     fetch(apiCityUrl).then(function (response) {
@@ -42,7 +42,7 @@ var getCityWeather = function (city) {
 };
 
 var getFiveDayWeather = function (city) {
-    var api5DayUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + apiKey;
+    var api5DayUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + apiKey;
 
     fetch(api5DayUrl).then(function (response5day) {
         response5day.json().then(function (data5day) {
@@ -115,7 +115,7 @@ var displayTodayTemp = function (todayWeather) {
 
     // calls the current day fuction
     todayCityEl.innerHTML = "<h5>" + todayWeather.name + " (" + today + ")" + "</h5>";
-    todayIcon.src = "http://openweathermap.org/img/w/" + todayWeather.weather[0].icon + ".png";
+    todayIcon.src = "https://openweathermap.org/img/w/" + todayWeather.weather[0].icon + ".png";
     todayTemp.textContent = "Temperature: " + Math.floor(todayWeather.main.temp) + "° F";
     todayHumidity.textContent = "Humidity: " + todayWeather.main.humidity + "%";
     todayWind.textContent = "Wind Speed: " + todayWeather.wind.speed + " MPH";
@@ -203,11 +203,11 @@ var display5DayTemp = function (Weather5Days) {
 
     day5DateEl.textContent = formatDate5;
 
-    icon1El.src = "http://openweathermap.org/img/w/" + Weather5Days.list[4].weather[0].icon + ".png";
-    icon2El.src = "http://openweathermap.org/img/w/" + Weather5Days.list[12].weather[0].icon + ".png";
-    icon3El.src = "http://openweathermap.org/img/w/" + Weather5Days.list[20].weather[0].icon + ".png";
-    icon4El.src = "http://openweathermap.org/img/w/" + Weather5Days.list[28].weather[0].icon + ".png";
-    icon5El.src = "http://openweathermap.org/img/w/" + Weather5Days.list[36].weather[0].icon + ".png";
+    icon1El.src = "https://openweathermap.org/img/w/" + Weather5Days.list[4].weather[0].icon + ".png";
+    icon2El.src = "https://openweathermap.org/img/w/" + Weather5Days.list[12].weather[0].icon + ".png";
+    icon3El.src = "https://openweathermap.org/img/w/" + Weather5Days.list[20].weather[0].icon + ".png";
+    icon4El.src = "https://openweathermap.org/img/w/" + Weather5Days.list[28].weather[0].icon + ".png";
+    icon5El.src = "https://openweathermap.org/img/w/" + Weather5Days.list[36].weather[0].icon + ".png";
     
     temp1El.textContent = "Temp: " + Math.floor(Weather5Days.list[4].main.temp) + "° F";
     temp2El.textContent = "Temp: " + Math.floor(Weather5Days.list[12].main.temp) + "° F";

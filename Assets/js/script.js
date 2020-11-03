@@ -102,7 +102,7 @@ var formSubmitHandler = function (event) {
 };
 
 var displayTodayTemp = function (todayWeather) {
-
+    
     // clear old content
     todayCityEl.textContent = "";
     todayTemp.textContent = "";
@@ -151,7 +151,7 @@ var displayTodayTemp = function (todayWeather) {
             } else {
                 todayUV.classList.remove("low", "high", "very-high", "moderate");;
                 todayUV.classList.add("extreme");
-            }
+            } 
         });
     });
 
@@ -222,6 +222,8 @@ var display5DayTemp = function (Weather5Days) {
     humid3El.textContent = "Humidity: " + Weather5Days.list[20].main.humidity + "%";
     humid4El.textContent = "Humidity: " + Weather5Days.list[28].main.humidity + "%";
     humid5El.textContent = "Humidity: " + Weather5Days.list[36].main.humidity + "%";
+
+    
 };
 
 cityFormEl.addEventListener("submit", formSubmitHandler);

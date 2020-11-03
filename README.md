@@ -28,7 +28,7 @@ THEN I am again presented with current and future conditions for that city
 https://mbogaert.github.io/weather-app/
 
 ## Screenshot
-![The image displays a screenshot of the weather application](./assets/images/screen-shot.png)
+![The image displays a screenshot of the weather application](./Assets/images/screen-shot.png)
 
 ## Contribution
 
